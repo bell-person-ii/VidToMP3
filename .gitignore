@@ -1,0 +1,14 @@
+# 가상환경 (PC마다 run.bat이 새로 만든다)
+.venv/
+__pycache__/
+*.pyc
+
+# 음성 인식 모델 (처음 쓸 때 자동으로 내려받으며, GitHub 파일 크기 제한을 넘는다)
+models/
+
+# 변환 중 임시 파일
+*.part
+
+# 편집기·도구 개인 설정
+.claude/
+.vscode/
