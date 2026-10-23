@@ -44,17 +44,27 @@ start "" ".venv\Scripts\pythonw.exe" "%~dp0main.py"
 exit /b 0
 
 :findpython
-rem Prefer the newest supported version, even if a newer unsupported one (3.15) is also installed.
+rem The portable Python from :installpython first, then installed ones. Prefer the newest supported
+rem version, even if a newer unsupported one (3.15) is also installed.
+rem No parentheses here: the folder path itself may contain ")" (e.g. "VidToMP3-main (1)").
+if exist ".python\python.exe" ".python\python.exe" -c "%CHECK%" >nul 2>nul && set PY="%~dp0.python\python.exe"
 for %%V in (3.14 3.13 3.12 3.11 3.10) do if not defined PY ( py -%%V -c "%CHECK%" <nul >nul 2>nul && set "PY=py -%%V" )
 if not defined PY ( python -c "%CHECK%" <nul >nul 2>nul && set "PY=python" )
-rem Where the Python 3.14 installer puts it. Right after installing, PATH is not updated in this window yet.
-for %%P in ("%LOCALAPPDATA%\Programs\Python\Python314\python.exe" "%ProgramFiles%\Python314\python.exe") do if not defined PY if exist %%P ( %%P -c "%CHECK%" >nul 2>nul && set "PY=%%P" )
 exit /b 0
 
 :installpython
-where winget >nul 2>nul || exit /b 0
+rem Portable 64-bit Python 3.14 (python-build-standalone, the build uv uses), unpacked into .python.
+rem Nothing outside this folder changes: no PATH, registry, py launcher default or admin prompt.
+set "PBS_URL=https://github.com/astral-sh/python-build-standalone/releases/download/20261013/cpython-3.14.8%%2B20261013-x86_64-pc-windows-msvc-install_only_stripped.tar.gz"
+set "PBS_SHA256=dce851f280b986764037bd952d40819e94ccceb08ac914004123f43ce17f4095"
 call :say installpython
-winget install -e --id Python.Python.3.14 --architecture x64 --scope user --custom "PrependPath=1" --accept-package-agreements --accept-source-agreements
+if exist ".python" rmdir /s /q ".python"
+curl -fL --retry 3 -o python.tar.gz "%PBS_URL%" || goto :pydone
+certutil -hashfile python.tar.gz SHA256 | findstr /i /x "%PBS_SHA256%" >nul || goto :pydone
+mkdir ".python"
+tar -xzf python.tar.gz -C ".python" --strip-components 1 || rmdir /s /q ".python"
+:pydone
+del /q python.tar.gz 2>nul
 call :findpython
 exit /b 0
 

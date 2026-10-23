@@ -2,13 +2,10 @@
 rebuild|지금 가상환경으로는 텍스트 변환을 쓸 수 없어 가상환경을 새로 만듭니다.
 venv|[1/2] 가상환경을 만드는 중...
 install|[2/2] 음원 변환과 텍스트 변환에 필요한 구성 요소를 설치하는 중... (처음 실행하거나 업데이트한 뒤에만, 몇 분 걸립니다)
-installpython|텍스트 변환에 필요한 Python 3.14(64비트)가 없어 설치합니다. 이미 설치된 다른 Python은 그대로 둡니다.
-installpython|"이 앱이 디바이스를 변경하도록 허용하시겠어요?" 창이 뜨면 [예]를 누르세요.
+installpython|텍스트 변환에 필요한 Python 3.14(64비트)를 이 프로그램 폴더 안에 내려받습니다. (약 23MB)
+installpython|PC에 설치된 Python이나 설정은 바꾸지 않으며, 이 폴더를 지우면 함께 지워집니다.
 nopython|
-nopython|Python 3.14를 자동으로 설치하지 못했습니다.
-nopython|https://www.python.org/downloads/windows/ 에서 Python 3.14의 "Windows installer (64-bit)"를 받아 설치한 뒤
-nopython|run.bat을 다시 실행하세요. 설치 첫 화면에서 "Add python.exe to PATH"를 꼭 체크하세요.
-nopython|최신 버전(3.15)이나 32비트 버전에서는 텍스트 변환을 쓸 수 없습니다.
+nopython|텍스트 변환에 필요한 Python 3.14를 내려받지 못했습니다. 인터넷 연결을 확인한 뒤 run.bat을 다시 실행하세요.
 inuse|가상환경 폴더(.venv)를 지우지 못했습니다. 프로그램 창이 열려 있으면 닫고 run.bat을 다시 실행하세요.
 installfail|
 installfail|구성 요소를 설치하지 못했습니다. 인터넷 연결을 확인한 뒤 run.bat을 다시 실행하세요.
