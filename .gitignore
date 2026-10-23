@@ -9,6 +9,9 @@ models/
 # 변환 중 임시 파일
 *.part
 
+# run.bat 설치 실패 기록
+install-log.txt
+
 # 편집기·도구 개인 설정
 .claude/
 .vscode/
